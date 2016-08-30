@@ -1,0 +1,92 @@
+#include <iostream>
+#include "conio.h"
+#include "stdlib.h"
+#define Max 50
+
+using namespace std;
+
+//void Cargar(double Vector[], int Numero);
+void Mostrar(double Vector[], int Numero);
+bool VerificarPrimo(int Numero);
+//void EliminarPrimo(double Vector[], int Numero);
+void CargarPrimos(&double Vector[], int Numero);
+
+void main()
+{
+	int Numero;
+	double Vector[Max];
+	cout<<"Hasta que numero desea agregar"<<endl;
+	cin>>Numero;
+	CargarPrimos(Vector, Numero);
+	//Cargar(Vector, Numero);
+	Mostrar(Vector, Numero);
+	//EliminarPrimo(Vector, Numero);
+
+	getch();
+}
+
+void Cargar (double Vector[], int Numero)
+{
+	int i;
+	for (i=0;i<Numero;i++)
+	{
+		system ("cls");
+		cout<<"Ingrese el numero para la posicion "<<i<<endl;
+		cin>>Vector[i];
+	}
+}
+
+void Mostrar (double Vector[], int Numero)
+{
+	int i;
+	system("cls");
+	for (i=0;i<Numero;i++)
+	{
+		cout<<"En la posicion "<<i<<" esta el numero: "<<Vector[i]<<endl;
+	}
+}
+
+bool VerificarPrimo(int Numero)
+{
+	int i;
+	bool k=true;
+	for(i=2; i<Numero; i++)
+	{
+		if(Numero%i==0)
+		{
+			k=false;
+		}
+	}
+	return (k);
+}
+
+void EliminarPrimo(double Vector[], int Numero)
+{
+	int i, Contador=0;
+	double Vector2[Max];
+	for (i=0;i<Numero;i++)
+	{
+		if (VerificarPrimo(Vector[i])==false)
+		{
+			Vector2[Contador]=Vector[i];
+			Contador++;
+		}
+	}
+	Mostrar(Vector2,Contador);
+}
+
+void CargarPrimos(&double Vector[], int Numero)
+{
+	int i, Contador=0;
+	for(i=1;c<Numero;i++)
+	{
+		if (VerificarPrimo(i)==true)
+		{
+			Vector[Contador]=i;
+			Contador++;
+		}
+	}
+	Mostrar(Vector, Contador);
+}
+
+void AlgoritmoTramboliko(
