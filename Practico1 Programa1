@@ -1,0 +1,322 @@
+#include <iostream>
+#include "conio.h"
+#include "windows.h"
+using namespace std;
+
+void Concatenar(int Numero1);
+int CuantosDigitos(int Numero);
+void EliminarIgual( int Numero);
+int Invertir(int Numero);
+void EliminaMayor(int Numero);
+void InsertarValor(int Numero);
+void Capicua(int Numero);
+void Planilla(int Numero);
+void Adivinar();
+void Crapulo(int Numero);
+void Automorfa();
+#define Max 100
+
+void main()
+{
+	int Numero, Opcion, Trabajadores;
+
+	cout<<"- - - - - - MENU - - - - - -"<<endl;
+	cout<<" "<<endl;
+	cout<<"1.  Concatenar el numero Menor con el Mayor"<<endl;
+	cout<<"2.  Eliminar digitos repetidos"<<endl;
+	cout<<"3.  Invertir dicho numero"<<endl;
+	cout<<"4.  Eliminar digito mayor"<<endl;
+	cout<<"5.  Meter numero en secuencia ordenado"<<endl;
+	cout<<"6.  Ver si es Capicua"<<endl;
+	cout<<"7.  Planilla para Empresa Tiluchi"<<endl;
+	cout<<"8.  Adivinar un numero"<<endl;
+	cout<<"9.  Sacar el crapulo de un Numero"<<endl;
+	cout<<"10. Numeros automorfas hasta el 1000"<<endl;
+	cout<<"0. Finalizar el Programa"<<endl;
+	cout<<" "<<endl;
+	cout<<"Digite su Opcion: "<<endl;
+	cin>>Opcion;
+	system("cls");
+
+		switch (Opcion)
+		{
+		case 1:{
+				cout<<"Ingrese un Numero: "<<endl;
+				cin>>Numero;
+				CuantosDigitos(Numero);
+				Concatenar(Numero);
+				}break;
+		case 2:{
+				cout<<"Ingrese un Numero: "<<endl;
+				cin>>Numero;
+				EliminarIgual(Numero);
+				}break;
+		case 3:{
+				cout<<"Ingrese un Numero: "<<endl;
+				cin>>Numero;
+				Invertir(Numero);
+				}break;
+		case 4:{
+				cout<<"Ingrese un Numero: "<<endl;
+				cin>>Numero;
+				EliminaMayor(Numero);
+			   }break;
+		case 5:{
+				cout<<"Ingrese un Numero Ordenado: "<<endl;
+				cin>>Numero;
+				InsertarValor(Numero);
+			   }break;
+		case 6:{
+				cout<<"Ingrese un Numero: "<<endl;
+				cin>>Numero;
+				Capicua(Numero);
+				}break;
+		case 7:{
+				cout<<"Cuantos Trabajadores tiene"<<endl;
+				cin>>Trabajadores;
+				 Planilla(Trabajadores);
+			   }break;
+		case 8:{
+			   Adivinar();
+			   }break;
+		case 9:{
+				cout<<"Ingrese un Numero: "<<endl;
+				cin>>Numero;
+				Crapulo(Numero);
+			   }break;
+		case 10:{
+				Automorfa();
+				}break;
+		case 0:{
+				cout<<" "<<endl;
+				cout<<"Hasta Luego"<<endl;
+			   }break;
+		default:{
+				}
+		}
+	getch();
+}
+
+void Concatenar(int Numero1)
+{
+	int Numero2, Numero3, Dato, Ten=10, i;
+	cout<<"Ingrese el segundo Numero"<<endl;
+	cin>>Numero2;
+
+	if(Numero1<Numero2)
+	{
+		Dato=CuantosDigitos(Numero2);
+		for(i=1; i<Dato;i++)
+		{
+			Ten=Ten*10;
+		}
+		Numero1=Numero1*Ten;
+		Numero3=Numero1+Numero2;
+		cout<<"El numero concatenado es: "<<Numero3<<endl;
+	}else{
+		Dato=CuantosDigitos(Numero1);
+		for(i=1; i<Dato;i++)
+		{
+			Ten=Ten*10;
+		}
+		Numero2=Numero2*Ten;
+		Numero3=Numero1+Numero2;
+		cout<<"El numero concatenado es: "<<Numero3<<endl;
+	}
+}
+
+int CuantosDigitos(int Numero)
+{
+	int Contador=0;
+	while(Numero>0)
+	{
+		Numero=Numero/10;
+		Contador++;
+	}
+	return(Contador);
+}
+
+int Invertir(int Numero)
+{
+    int Auxiliar,Invertido=0;                                                                                     
+    while(Numero!=0)                               
+      {
+         Auxiliar=Numero%10;
+         Numero=Numero/10;            
+         Invertido=Invertido*10+Auxiliar;         
+       }
+	cout<<"El numero invertido es: "<<Invertido<<endl;
+	return(Invertido);
+}
+
+void EliminarIgual(int Numero)
+{
+	int u,N=0,j=0,a,c=0;
+	for(int i=1;i<=Numero;i=i*10)
+	{	a=(Numero/i)%10;
+		for(int m=1;m<=Numero;m=m*10)
+		{	
+			u=(Numero/m)%10;
+			if(a==u)
+			{
+				c=c+1;
+			}	
+		}
+			if(c==1){
+				N=N+(a*powf(10,j));
+				j=j+1;}
+			c=0;
+	}
+	cout<<"El nuevo numero es: "<<N<<endl;	
+}
+
+void EliminaMayor(int Numero)
+{
+	int i, Auxiliar, Mayor=0, Contador=0, Contador2=1;
+	for (i=1;i<=Numero;i=i*10)
+	{
+		Auxiliar=(Numero/i)%10;
+		if(Auxiliar>Mayor)
+		{
+			Mayor=Auxiliar;
+		}
+	}
+	for(i=1;i<=Numero;i=i*10)
+	{
+		Auxiliar=(Numero/i)%10;
+		if(Auxiliar!=Mayor)
+		{
+			Contador=Contador+(Auxiliar*Contador2);
+			Contador2=Contador2*10;
+		}
+	}
+	cout<<"El numero nuevo es: "<<Contador<<endl;
+}
+
+void IngresarNumeroOrdenado(int Numero)
+{
+	int i, Meter, Auxiliar;
+	cout<<"Ingrese el digito que desea meter al numero ORDENADO: "<<endl;
+	cin>>Meter;
+	for(i=1;i<=Numero;i=i*10)
+	{
+		Auxiliar=(Numero/i)%10;
+		if(Auxiliar<Meter)
+		{
+			Numero=(Numero*10)+Meter;
+			i=Numero+1;
+		}
+	}
+	cout<<Numero;
+}
+
+void Capicua(int Numero)
+{
+	int Invertido;
+	Invertido=Invertir(Numero);
+	if (Numero==Invertido)
+	{
+	cout<<"Es Capicua"<<endl;
+	}else{
+	cout<<"No es Capcicua"<<endl;
+	}
+}
+void Planilla(int Numero)
+{
+	int i, Horas, Pago, Sueldo;
+	cout<<"- - - - - - - Planilla - - - - - - -"<<endl;
+	cout<<"Saldo - - Trabajador - - - - Horas"<<endl;
+	for(int i=1;i<=Numero;i++){
+	cout<<" El trabajador "<<i<<" Horas trabajadas: ";
+	cin>>Horas;
+	Sueldo=Horas*20;
+	Pago=Pago+Sueldo;
+	cout<<"Se le debe pagar: "<<Pago<<endl;
+	}
+}
+
+void InsertarValor(int Numero)
+{
+	int c=0,t=0,N=0,u,num,Listo,j=1,cont=1,k=0, m;
+	cout<<"Ingrese el numero que desea meter: "<<endl;
+	cin>>m;
+	num=Invertir(Numero);
+	for(int i=1;i<=num;i=i*10)
+	{	u=(num/i)%10;
+		cont=cont+1;
+		if(m>u){
+		c=c+1;
+		}
+	}
+	
+	for(int i=1;t<=cont;t++)
+	{	if(c==t){
+			N=N+(m*powf(10,c));
+				}
+		else{
+			u=(num/i)%10;
+			N=N+(u*powf(10,t));
+			i=i*10;
+			}
+		}
+	Listo=Invertir(N);
+	cout<<"El nuevo numero es: "<<Listo;
+}
+
+void Adivinar()
+{
+	int i, Adivinar, Number;
+	Adivinar=rand();
+	while(Number!=Adivinar)
+	{
+		system("cls");
+		cout<<"Ingrese un Numero del 1 al 100: "<<endl;
+		cin>>Number;
+		if (Number<Adivinar)
+		{
+			cout<<"Es mayor el numero buscado"<<endl;
+			system("pause>null");
+		}else{
+		if(Number>Adivinar){
+			cout<<"Es Menor el numero buscado"<<endl;
+			system("pause>null");
+		}else{
+			cout<<"Lo lograste"<<endl;
+			system("pause>null");
+			}
+		}
+	}
+}
+
+void Crapulo(int Numero)
+{
+	int suma,u;
+	for(int i=1;i<=Numero;i=i*10)
+	{	u=(Numero/i)%10;
+		suma=suma+u;
+		if(suma>9){
+			suma=suma-9;}
+	}
+	cout<< "El nuevo numero es: "<<suma<<endl;
+}
+
+void Automorfa()
+{ 
+	int u,cuadrado,c=0,h,dividor,a,i;
+	for(i=5;i<=1000;i++)
+	{
+		cuadrado=i*i;
+		for(h=1;h<=i;h=h*10)
+		{
+			c=c+1;
+			u=(i/h)%10;
+		}
+		dividor=powf(10,c);
+		a=cuadrado%dividor;
+		c=0;
+		if(i==a)
+		{
+			cout<<i<<"   ";}
+		}
+		
+}
