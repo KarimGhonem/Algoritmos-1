@@ -1,0 +1,104 @@
+#include <iostream>
+#include "conio.h"
+#include "windows.h"
+#define Max 100
+
+using namespace std;
+
+void Cargar(double Vector[Max], int Numero);
+double Fibonacci();
+bool EsPrimo(int Numero);
+void Eliminar(double Vector[Max], int Numero, double Vector1);
+void Mostrar(double Vector[Max], int Numero);
+
+void main()
+{
+	int Numero;
+	double Vector[Max], Nuevo;
+	cout<<"Cuantos elementos tiene el vector: "<<endl;
+	cin>>Numero;
+	Cargar(Vector, Numero);
+	Nuevo=Fibonacci();
+	Eliminar(Vector, Numero, Nuevo);
+	getch();
+}
+
+void Cargar(double Vector[Max], int Numero)
+{
+	int i;
+	cout<<"Ingrese los valores del vector: "<<endl;
+	for(i=0;i<Numero;i++)
+	{
+		cin>>Vector[i];
+	}
+}
+
+double Fibonacci()
+{
+	int i, First=0, Second=1, Next=0;
+	double Vector[Max];
+	for (i=0;i<Max;i++)
+	{
+		if(i<=1)
+		{
+			Vector[i]=i;
+		}else{
+			Next=First+Second;
+			First=Second;
+			Second=Next;
+		}
+	}
+	return(Vector[Max]);
+}
+
+bool EsPrimo(int Numero)
+{
+	bool k=true;
+	int i;
+	for(i=2;i<Numero;i++)
+	{
+		if(Numero%i==0)
+		{
+			k=false;
+		}
+	}
+	return(k);
+}
+
+void Eliminar(double Vector[Max], int Numero, double Vector1[Max])
+{
+	int i, j=0, k=0, m=0, Contador=0;
+
+	for(i=0;i<Numero;i++)
+	{
+		for(m;i>100;m++)
+		{
+			if(Vector[i]==Vector1[m])
+			{
+			}else{
+				Vector[j]=Vector[i];
+				j++;
+			}
+		}
+	}
+	for(j=0;j<Contador;j++)
+	{
+		if(EsPrimo(Vector[j])==1)
+		{
+
+		}else{
+		Vector[k]=Vector[j];
+		k++;
+		}
+	}
+	Mostrar(Vector, k);
+}
+void Mostrar(double Vector[Max], int Numero)
+{
+	int i;
+	system("cls");
+	for(i=0;i<Numero;i++)
+	{
+		cout<<"Vector posicion: "<<i<<" es ["<<Vector[i]<<"]"<<endl;
+	}
+}
