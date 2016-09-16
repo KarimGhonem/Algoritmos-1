@@ -1,0 +1,39 @@
+#include <iostream>
+#include "conio.h"
+#include "string.h"
+#define Max 100
+
+using namespace std;
+
+void Palindroma(char Cadena[Max]);
+
+void main()
+{
+	char Cadena[Max];
+	cout<<"Ingrese una Palabra"<<endl;
+	gets(Cadena);
+	//Palindroma(Cadena);
+	getch();
+}
+
+void Palindroma(char Cadena[Max])
+{
+	int i, Length;
+	char Cadena2[Max], Aux;
+	Length=strlen(Cadena);
+	strcpy(Cadena2, Cadena);
+	for(i=0;i<Length/2;i++)
+
+	{
+		Aux=Cadena[i];
+		Cadena[i]=Cadena[Length-i-1];
+		Cadena [Length-i-1]=Aux;
+	}
+
+	if(strcmp(Cadena,Cadena2)==0)
+	{
+		cout<<"Es palindroma!"<<endl;
+	}else{
+		cout<<"No es palindroma!"<<endl;
+	}
+}
