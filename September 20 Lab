@@ -1,0 +1,135 @@
+#include <iostream>
+#include "conio.h"
+#include "windows.h"
+#define Max 100
+
+struct Estructura
+{
+	int Vec[Max];
+};
+
+using namespace std;
+
+void CargarVectores (Estructura tVec[], int Numero);
+void MostrarVectores (Estructura tVec[], int Numero);
+void Secuencia (Estructura tVec[], int Numero);
+void Burbuja (Estructura tVec[], int Numero);
+bool EsPrimo (int Numero);
+void AgarrarPrimos(Estructura tVec[], int Numero);
+
+void main()
+{
+	Estructura Vec[Max];
+	int Numero;
+	cout<<"Cuantas posiciones existen en su vector principal: "<<endl;
+	cin>> Numero;
+	Secuencia(Vec, Numero);
+	AgarrarPrimos(Vec, Numero);
+	//CargarVectores(Vec, Numero);
+	//Burbuja (Vec, Numero);
+	//MostrarVectores(Vec, Numero);
+	getch();
+}
+
+void CargarVectores (Estructura tVec[], int Numero)
+{
+	int i, m;
+	for (i=0;i<Numero;i++)
+	{
+		cout<<"Vector: "<<i<<endl;
+		for(m=0;m<Numero;m++)
+		{
+			cout<<"Ingrese valor: "<<endl;
+			cin>>tVec[i].Vec[m];
+		}
+	}
+}
+
+void MostrarVectores (Estructura tVec[], int Numero)
+{
+	int i, m;
+	system("cls");
+	for (i=0;i<Numero;i++)
+	{
+		cout<<"Vector: "<<i<<endl;
+		for(m=0;m<Numero;m++)
+		{
+			cout<<tVec[i].Vec[m]<<endl;
+		}
+		cout<<endl;
+	}
+}
+
+void Secuencia(Estructura tVec[], int Numero)
+{
+	int i, m, Contador1=1, Contador2=1, Contador3=1;
+	for (i=0;i<Numero;i++)
+	{
+		for(m=0;m<Numero;m++)
+		{
+			if(i==m)
+			{
+				tVec[i].Vec[m]=Contador1;
+				Contador1++;
+			}else{
+				if(i<m)
+				{
+					tVec[i].Vec[m]=Contador2;
+					Contador2=Contador2+2;
+				}else{
+					tVec[i].Vec[m]=Contador3;
+					Contador3=Contador3+2;
+					}
+				}
+		}
+	}
+}
+
+void Burbuja(Estructura tVec[], int Numero)
+{
+	int i, m, j, Aux;
+	for (i=0;i<Numero;i++)
+	{
+		for(m=0;m<Numero;m++)
+		{
+			for(j=m+1;j<Numero;j++)
+			{
+				if(tVec[i].Vec[m]>tVec[i].Vec[j])
+				{
+					Aux = tVec[i].Vec[m];
+					tVec[i].Vec[m]=tVec[i].Vec[j];
+					tVec[i].Vec[j]=Aux;
+				}
+			}
+		}
+	}
+}
+
+bool EsPrimo(int Numero)
+{
+	bool k=true;
+	int i;
+	for(i=2;i<Numero;i++)
+	{
+		if (Numero%i==0)
+		{
+			k=false;
+		}
+	}
+	return(k);
+}
+
+void AgarrarPrimos(Estructura tVec[], int Numero)
+{
+	int i, m, Contador=0;
+	Estructura VectorPrimo[Max];
+	for (i=0;i<Numero;i++)
+	{
+		for(m=0;m<Numero;m++)
+		{
+			if(EsPrimo(tVec[i].Vec[m])==1);
+			VectorPrimo[Contador]=tVec[i].Vec[m];
+		}
+	}
+	MostrarVectores(VectorPrimo, Numero);
+}
