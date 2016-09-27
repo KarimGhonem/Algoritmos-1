@@ -1,0 +1,136 @@
+#include <iostream>
+#include "conio.h"
+#include "string.h"
+#include "windows.h"
+using namespace std;
+
+#define FIL 20
+#define COL 20
+
+void Cargar(int mat[FIL][COL], int n, int m)
+{
+	system("cls");
+	int i, j;
+	for(i=0;i<n;i++)
+	{
+		for(j=0;j<m;j++)
+		{
+			cout<<"Ingrese el numero para la fila: ["<<i<<"] columna: ["<<j<<"] "<<endl;
+			cin>>mat[i][j];
+		}
+	}
+}
+
+void Mostrar(int mat[FIL][COL], int n, int m)
+{
+	system("cls");
+	int i, j;
+	for(i=0;i<n;i++)
+	{
+		for(j=0;j<m;j++)
+		{
+			cout<<"En la Fila ["<<i<<"] Columna ["<<j<<"] Esta el numero: "<<mat[i][j]<<endl;
+			cout<<endl;
+		}
+	}
+}
+
+void MostrarVec(int Vector[COL], int n)
+{
+	int i;
+	for(i=0;i<n;i++)
+	{
+		cout<<Vector[i]<<endl;
+	}
+}
+
+void Mayor(int mat[FIL][COL], int n, int m)
+{
+	system("cls");
+	int i, j, Mayor=0;
+	for(i=0;i<n;i++)
+	{
+		for(j=0;j<m;j++)
+		{
+			if(mat[i][j]>Mayor)
+			{
+			Mayor=mat[i][j];
+			}
+		}
+	}
+	cout<<"El mayor numero es: "<<Mayor<<endl;
+}
+
+void OrdenarMatriz(int mat[FIL][COL], int n, int m)
+{
+	system("cls");
+	int i, j, k, Aux=0;
+	for(i=0;i<n;i++)
+	{
+		for(j=0;j<m;j++)
+		{
+			for(k=j+1;k<n;k++)
+			{
+				if(mat[i][j]>mat[i][k])
+				{
+					Aux=mat[i][j];
+					mat[i][j]=mat[i][k];
+					mat[i][k]=Aux;
+				}
+			}
+		}
+	}
+}
+
+bool EsPrimo(int n)
+{
+	int i;
+	bool k=true;
+	for(i=2;i<n;i++)
+	{
+		if(n%i==0)
+		{
+			k=false;
+		}
+	}
+	return (k);
+}
+
+void SumaPrimos(int mat[FIL][COL], int n, int m)
+{
+	system("cls");
+	int Vector[COL];
+	int i, j, k, suma=0;
+	for(i=0;i<n;i++)
+	{
+		for(j=0;j<m;j++)
+		{
+			for(k=0;k<m;k++)
+			{
+				if(EsPrimo(mat[i][j])==1)
+				{
+					suma=suma+mat[i][j];
+				}
+			}
+			Vector[i]=suma;
+			suma=0;
+		}
+	}
+	MostrarVec(Vector,m);
+}
+
+void main()
+{
+	int Filas, Columnas, Matriz [FIL][COL];
+	cout<<"Cuantas filas tiene? "<<endl;
+	cin>>Filas;
+
+	cout<<"Cuantas columnas tiene? "<<endl;
+	cin>>Columnas;
+	Cargar(Matriz,Filas,Columnas);
+	SumaPrimos(Matriz,Filas,Columnas);
+	//Ordenar(Matriz,Filas,Columnas);
+	//Mayor(Matriz,Filas,Columnas);
+	//Mostrar(Matriz,Filas,Columnas);
+	getch();
+}
