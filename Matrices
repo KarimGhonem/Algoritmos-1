@@ -1,0 +1,143 @@
+#include <iostream>
+#include "conio.h"
+#include "windows.h"
+#define Max 20
+#define Fil 5
+#define Col 5
+
+using namespace std;
+
+void CargarMatriz(int mat[Fil][Col], int x, int y)
+{
+	system("cls");
+	int i, j;
+	for(i=0;i<x;i++)
+	{
+		for(j=0;j<y;j++)
+		{
+			cout<<"Ingrese el valor entero para Fila: "<<i<<" Columna: "<<j<<endl;
+			cin>>mat[i][j];
+		}
+	}
+}
+
+void MostrarMatriz(int mat[Fil][Col], int x, int y)
+{
+	system("cls");
+	int i, j;
+	for(i=0;i<x;i++)
+	{
+		for(j=0;j<y;j++)
+		{
+			cout<<mat[i][j]<<"	";
+		}
+		cout<<endl;
+	}
+}
+
+void SumaMatrices(int mat[Fil][Col], int x, int y)
+{
+	int mat2[Fil][Col], mat3[Fil][Col], i, j;
+	CargarMatriz(mat2, x, y);
+	for(i=0;i<x;i++)
+	{
+		for(j=0;j<y;j++)
+		{
+			mat3[i][j]=mat[i][j]+mat2[i][j];
+		}
+	}
+	MostrarMatriz(mat3, x, y);
+}
+
+void Transversa(int mat[Fil][Col], int x, int y)
+{
+	int i, j, Aux;
+	for(i=0;i<x;i++)
+	{
+		for(j=0;j<y;j++)
+		{
+			if(i!=j)
+			{
+				if(i<j)
+				{
+					Aux=mat[i][j];
+					mat[i][j]=mat[j][i];
+					mat[j][i]=Aux;
+				}
+			}
+		}
+	}
+	MostrarMatriz(mat, x, y);
+}
+
+void Multiplicacion(int mat[Fil][Col], int x, int y)
+{
+	int i, j, k, mat2[Fil][Col], mat3[Fil][Col];
+	CargarMatriz(mat2, x, y);
+	for (i=0;i<x;i++)
+	{
+		for (j=0;j<y;j++)
+		{ 
+			mat3[i][j]=0;
+			for (k=0;k<x;k++)
+			{
+				mat3[i][j]=mat3[i][j]+mat[i][k]*mat2[k][j];
+			}
+		}
+	}
+	MostrarMatriz(mat3, x, y);
+}
+
+void main()
+{
+	int mat [Fil][Col], x, y, opcion;
+	cout<<"Ingrese sus dimensiones (Se trabaja con matrices cuadradas)"<<endl;
+	cin>>x;
+	y=x;
+	cout<<"Cargue su matriz: "<<endl;
+	CargarMatriz(mat, x, y);
+
+	do{
+		cout<<endl;
+		cout<<endl;
+		cout<<"- - - - - -Menu- - - - - -"<<endl;
+		cout<<"1. Suma de matrices"<<endl;
+		cout<<"2. Transversa de la matriz"<<endl;
+		cout<<"3. Multiplicacion de matrices"<<endl;
+		cout<<"4. Inversa de una matriz"<<endl;
+		cout<<"0. Salir del programa"<<endl; 
+		cin>>opcion;
+	}while(opcion<=0 && opcion>5);
+
+	switch(opcion)
+	{
+		case 1:
+			{
+				SumaMatrices(mat, x, y);
+			break;}
+		case 2:
+			{
+				Transversa(mat, x, y);
+			break;}
+		case 3:
+			{
+				Multiplicacion(mat, x, y);
+			break;}
+		case 4:
+			{
+			
+			break;}
+		case 0:
+			{
+
+			break;}
+		default:
+			{
+			
+			break;}
+	}
+	getch();
+
+}
+
+
