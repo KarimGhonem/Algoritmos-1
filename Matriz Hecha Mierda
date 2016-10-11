@@ -1,0 +1,164 @@
+#include <iostream>
+#include "conio.h"
+#include "windows.h"
+#define Fil 5
+#define Col 5
+#define Max 100
+
+using namespace std;
+
+struct SMatriz
+{
+	int Smat[Fil][Col];
+	int Svec[Max];
+};
+
+
+void CargarMatriz(SMatriz mat[Fil][Col], int Fila, int Columna, SMatriz Fila2, SMatriz Columna2)
+{
+	int i, j, k, l, Contador=0;
+	for(i=0;i<Fila;i++)
+	{
+		for(j=0;j<Columna;j++)
+		{
+			for(k=0;k<Fila2.Svec[k];k++)
+			{
+				for(l=0;l<Columna2.Svec[l];l++)
+				{
+					mat[i][j].Smat[k][l]=Contador;
+					Contador++;
+				}
+			}
+		}
+	}
+}
+
+void MostrarMatriz(SMatriz mat[Fil][Col], int Fila, int Columna, SMatriz Fila2, SMatriz Columna2)
+{	system("cls");
+	int i, j, k, l, Contador=0;
+	for(i=0;i<Fila;i++)
+	{
+		for(j=0;j<Columna;j++)
+		{
+			for(k=0;k<Fila2.Svec[k];k++)
+			{
+				for(l=0;l<Columna2.Svec[l];l++)
+				{
+					cout<<mat[i][j].Smat[k][l]<<"   ";
+				}
+				cout<<"		";
+			}
+			cout<<endl;
+		}
+		cout<<endl;
+	}
+}
+
+void EsPrimo(int n)
+{
+	int i, Primo=0;
+	for(i=2;i<n;i++)
+	{
+		if(n%i==0)
+		{
+			Primo=1;
+		}
+	}
+}
+
+void AgarrarPrimos(SMatriz mat[Fil][Col], int Fila, int Columna, SMatriz Fila2, SMatriz Columna2)
+{
+	int Primo[Max], m=0;
+	int i, j, k, l, Contador=0;
+	for(i=0;i<Fila;i++)
+	{
+		for(j=0;j<Columna;j++)
+		{
+			for(k=0;k<Fila2.Svec[k];k++)
+			{
+				for(l=0;l<Columna2.Svec[l];l++)
+				{
+					if(EsPrimo(mat[i][j].Smat[k][l])==1)
+					{
+						Primo[m]=mat[i][j].Smat[k][l];
+						m++;
+					}
+				}
+			}
+		}
+	}
+	OrdenarPrimos(Primo, m);
+}
+
+void OrdenarPrimos(int Primo[Max], int m)
+{
+	int Aux, i, Aux2, k;
+	for(i=0;i<m-1;i++)
+	{
+		for(k=0;k<m-1;k++)
+		{
+			if(Primo[i]>Primo[k])
+			{
+				Aux=Primo[i];
+				Primo[i]=Primo[k];
+				Primo[k]=Aux;
+			}
+		}
+	}
+}
+
+void Ejercicio(SMatriz mat[Fil][Col], int Fila, int Columna, SMatriz Fila2, SMatriz Columna2)
+{
+	int i, j, k, l, Contador=0;
+	for(i=0;i<Fila;i++)
+	{
+		for(j=0;j<Columna;j++)
+		{
+			for(k=0;k<Fila2.Svec[k];k++)
+			{
+				for(l=0;l<Columna2.Svec[l];l++)
+				{
+					if(i==j)
+					{
+						AgarrarPrimos(mat[Fil][Col], Fila, Columna, Fila2, Columna2);
+					}
+					if(i<j)
+					{
+						AgarrarPrimos(mat[Fil][Col], Fila, Columna, Fila2, Columna2);
+					}
+					if(i>j)
+					{
+						AgarrarPrimos(mat[Fil][Col], Fila, Columna, Fila2, Columna2);
+					}
+				}
+			}
+		}
+	}
+	MostrarMatriz(mat, Fila, Columna, Fila2, Columna2);
+}
+
+
+
+void main()
+{
+	int Fila, Columna, i, max, k=0;
+	SMatriz Fila2, Columna2;
+	SMatriz mat[Fil][Col];
+	Fila= 2;
+	Columna= 2;
+	max=Fila*Columna;
+	for (i=0;i<max;i++)
+	{
+		system("cls");
+		cout<<"dimensiones de la matriz: "<<i<<endl;
+		cout<<"Numero de filas: "<<endl;
+		cin>>Fila2.Svec[i];
+		cout<<"Numero de columnas: "<<endl;
+		cin>>Columna2.Svec[k];
+		k++;
+	}
+	CargarMatriz(mat, Fila, Columna, Fila2, Columna2);
+	MostrarMatriz(mat, Fila, Columna, Fila2, Columna2);
+	getch();
+}
+
