@@ -38,7 +38,7 @@ void LineaHorizontal(char mat[Fil][Col], int x1, int y1, int x2, int y2)
 	int i;
 	for(i=y1;i<y2;i++)
 	{
-		mat[x1][i]=220;
+		mat[x1][i]=219;
 	}
 }
 
@@ -48,7 +48,7 @@ void LineaVertical(char mat[Fil][Col], int x1, int y1, int x2, int y2)
 	int i;
 	for(i=x1;i<x2;i++)
 	{
-		mat[i][y1]=220;
+		mat[i][y1]=219;
 	}
 }
 
@@ -77,8 +77,8 @@ void Nombre(char Mat[Fil][Col])
 	LineaHorizontal(Mat, 8, 5, 8, 7);
 	LineaHorizontal(Mat, 19, 19, 19, 22);
 	LineaHorizontal(Mat, 21, 19, 21, 22);
-	LineaHorizontal(Mat, 15, 23, 15, 25);
-	LineaHorizontal(Mat, 17, 23, 17, 26);
+	LineaHorizontal(Mat, 14, 23, 14, 26);
+	LineaHorizontal(Mat, 16, 23, 16, 26);
 	LineaHorizontal(Mat, 22, 28, 22, 31);
 	LineaHorizontal(Mat, 22, 33, 22, 36);
 	LineaHorizontal(Mat, 24, 30, 24, 34);
@@ -112,8 +112,8 @@ void Nombre(char Mat[Fil][Col])
 	LineaVertical(Mat, 19, 22, 22, 22);
 	LineaVertical(Mat, 18, 23, 27, 23);
 	LineaVertical(Mat, 18, 25, 27, 25);
-	LineaVertical(Mat, 15, 23, 17, 23);
-	LineaVertical(Mat, 15, 25, 17, 25);
+	LineaVertical(Mat, 14, 23, 16, 23);
+	LineaVertical(Mat, 14, 25, 16, 25);
 	LineaVertical(Mat, 19, 26, 27, 26);
 	LineaVertical(Mat, 19, 37, 27, 37);
 	LineaVertical(Mat, 22, 28, 27, 28);
