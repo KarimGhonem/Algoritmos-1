@@ -1,0 +1,134 @@
+#include <iostream>
+#include "conio.h"
+#include "string.h"
+#include "windows.h"
+#define Fil 34
+#define Col 38
+
+using namespace std;
+
+void CargarPlano(int Fila, int Columnas, char Mat[Fil][Col])
+{
+	int i, j;
+	for(i=0;i<=Fil;i++)
+	{
+		for(j=0;j<=Col;j++)
+		{
+			Mat[i][j]=255;
+		}
+	}
+}
+
+void MostrarPlano(int Fila, int Columnas, char Mat[Fil][Col])
+{
+	int i, j;
+	for(i=0;i<=Fil;i++)
+	{
+		for(j=0;j<=Col;j++)
+		{
+			cout<<Mat[i][j]<<" ";
+		}
+		cout<<endl;
+	}
+}
+
+void LineaHorizontal(char mat[Fil][Col], int x1, int y1, int x2, int y2)
+{
+	//y es igual
+	int i;
+	for(i=y1;i<y2;i++)
+	{
+		mat[x1][i]=220;
+	}
+}
+
+void LineaVertical(char mat[Fil][Col], int x1, int y1, int x2, int y2)
+{
+	//x es igual
+	int i;
+	for(i=x1;i<x2;i++)
+	{
+		mat[i][y1]=220;
+	}
+}
+
+void Nombre(char Mat[Fil][Col])
+{
+	int Fila=34, Columna=38;
+	LineaHorizontal(Mat, 26, 1, 26, 3);
+	LineaHorizontal(Mat, 26, 5, 26, 7);
+	LineaHorizontal(Mat, 26, 8, 26, 13);
+	LineaHorizontal(Mat, 26, 14, 26, 16);
+	LineaHorizontal(Mat, 26, 17, 26, 19);
+	LineaHorizontal(Mat, 26, 23, 26, 25);
+	LineaHorizontal(Mat, 26, 27, 26, 29);
+	LineaHorizontal(Mat, 26, 35, 26, 37);
+	LineaHorizontal(Mat, 18, 3, 18, 4);
+	LineaHorizontal(Mat, 18, 5, 18, 6);
+	LineaHorizontal(Mat, 18, 8, 18, 13);
+	LineaHorizontal(Mat, 18, 17, 18, 19);
+	LineaHorizontal(Mat, 18, 23, 18, 25);
+	LineaHorizontal(Mat, 18, 27, 18, 30);
+	LineaHorizontal(Mat, 18, 34, 18, 37);
+	LineaHorizontal(Mat, 20, 9, 20, 12);
+	LineaHorizontal(Mat, 24, 9, 24, 12);
+	LineaHorizontal(Mat, 20, 13, 20, 15);
+	LineaHorizontal(Mat, 8, 1, 8, 3);
+	LineaHorizontal(Mat, 8, 5, 8, 7);
+	LineaHorizontal(Mat, 19, 19, 19, 22);
+	LineaHorizontal(Mat, 21, 19, 21, 22);
+	LineaHorizontal(Mat, 15, 23, 15, 25);
+	LineaHorizontal(Mat, 17, 23, 17, 26);
+	LineaHorizontal(Mat, 22, 28, 22, 31);
+	LineaHorizontal(Mat, 22, 33, 22, 36);
+	LineaHorizontal(Mat, 24, 30, 24, 34);
+	LineaHorizontal(Mat, 21, 31, 21, 33);
+	LineaHorizontal(Mat, 20, 30, 20, 32);
+	LineaHorizontal(Mat, 20, 32, 20, 34);
+	LineaHorizontal(Mat, 19, 29, 19, 31);
+	LineaHorizontal(Mat, 19, 33, 19, 35);
+
+	LineaVertical(Mat, 8, 1, 26, 1);
+	LineaVertical(Mat, 8, 3, 17, 3);
+	LineaVertical(Mat, 19, 3, 27, 3);
+	LineaVertical(Mat, 18, 8, 26, 8);
+	LineaVertical(Mat, 18, 13, 20, 13);
+	LineaVertical(Mat, 24, 13, 27, 13);
+	LineaVertical(Mat, 14, 4, 17, 4);
+	LineaVertical(Mat, 18, 4, 21, 4);
+	LineaVertical(Mat, 20, 5, 26, 5);
+	LineaVertical(Mat, 19, 7, 27, 7);
+	LineaVertical(Mat, 18, 6, 20, 6);
+	LineaVertical(Mat, 16, 5, 18, 5);
+	LineaVertical(Mat, 8, 5, 15, 5);
+	LineaVertical(Mat, 8, 7, 16, 7);
+	LineaVertical(Mat, 15, 6, 17, 6);
+	LineaVertical(Mat, 20, 9, 25, 9);
+	LineaVertical(Mat, 20, 12, 25, 12);
+	LineaVertical(Mat, 20, 15, 27, 15);
+	LineaVertical(Mat, 18, 17, 27, 17);
+	LineaVertical(Mat, 18, 19, 20, 19);
+	LineaVertical(Mat, 21, 19, 27, 19);
+	LineaVertical(Mat, 19, 22, 22, 22);
+	LineaVertical(Mat, 18, 23, 27, 23);
+	LineaVertical(Mat, 18, 25, 27, 25);
+	LineaVertical(Mat, 15, 23, 17, 23);
+	LineaVertical(Mat, 15, 25, 17, 25);
+	LineaVertical(Mat, 19, 26, 27, 26);
+	LineaVertical(Mat, 19, 37, 27, 37);
+	LineaVertical(Mat, 22, 28, 27, 28);
+	LineaVertical(Mat, 22, 35, 27, 35);
+	LineaVertical(Mat, 22, 30, 24, 30);
+	LineaVertical(Mat, 22, 33, 24, 33);
+
+	MostrarPlano(Fila, Columna, Mat);
+}
+
+void main()
+{
+	int Fila=34, Columna=38;
+	char Mat[Fil][Col];
+	CargarPlano(Fila, Columna, Mat);
+	Nombre(Mat);
+	getch();
+}
