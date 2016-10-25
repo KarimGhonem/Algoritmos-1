@@ -1,0 +1,71 @@
+#include <iostream>
+#include "conio.h"
+#include <string.h>
+#include "windows.h"
+#include <stdio.h>
+
+using namespace std;
+
+struct Registro
+{
+	char Nombre[30];
+	int Edad;
+	char Sexo;    //F o M
+	char Estado;  //A o E
+};
+
+void AdicionarAmigo()
+{
+	Registro Reg;
+	FILE *ptr;
+	system("cls");
+
+	do{
+		cout<<"Ingrese su nombre: "<<endl;
+		fflush(stdin);
+		gets(Reg.Nombre);
+	}while(strlen(Reg.Nombre)==0);
+
+	do{
+		cout<<"Ingrese su Edad: "<<endl;
+		cin>>Reg.Edad;
+	}while((Reg.Edad<0)||(Reg.Edad>120));
+
+	do{
+		cout<<"Ingrese su Sexo F/M: "<<endl;
+		cin>>Reg.Sexo;
+	}while((Reg.Sexo!=70) && (Reg.Sexo!=77));
+
+	Reg.Estado='A';
+
+	ptr= fopen("amigos.dat","ab"); //crea archivo
+	fwrite(&Reg,sizeof(Reg),1,ptr);
+	fclose(ptr);
+}
+
+void MostrarAmigos()
+{
+	system("cls");
+	FILE *ptr;
+	Registro Reg;
+	ptr = fopen("amigos.dat","rb");
+	if(ptr !=NULL){
+		fread(&Reg,sizeof(Reg),1,ptr);
+		while((feof(ptr))==false)
+		{
+			cout<<Reg.Nombre<<" "<<Reg.Edad<<" "<<Reg.Sexo<<"		";
+			fread(&Reg,sizeof(Reg),1,ptr);
+		}
+		fclose(ptr);
+	}else{
+		cout<"/nArchivo no existe...!!!/n";
+	}
+}
+
+
+void main()
+{
+	AdicionarAmigo();
+	MostrarAmigos();
+	getch();
+}
