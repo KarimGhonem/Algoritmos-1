@@ -1,0 +1,165 @@
+#include <iostream>
+#include "conio.h"
+#include <string.h>
+#include "windows.h"
+#include <stdio.h>
+
+using namespace std;
+
+struct Registro
+{
+	char Nombre[30];
+	int Edad;
+	char Sexo;    //F o M
+	char Estado;  //A o E
+};
+
+void AdicionarAmigo()
+{
+	Registro Reg;
+	FILE *ptr;
+	system("cls");
+	do{
+		cout<<"Ingrese su nombre: "<<endl;
+		fflush(stdin);
+		gets(Reg.Nombre);
+	}while(strlen(Reg.Nombre)==0);
+
+	do{
+		cout<<"Ingrese su Edad: "<<endl;
+		cin>>Reg.Edad;
+	}while((Reg.Edad<0)||(Reg.Edad>120));
+
+	do{
+		cout<<"Ingrese su Sexo F/M: "<<endl;
+		cin>>Reg.Sexo;
+	}while((Reg.Sexo!=70) && (Reg.Sexo!=77));
+
+	Reg.Estado='A';
+
+	ptr= fopen("amigos.dat","ab"); //crea archivo
+	fwrite(&Reg,sizeof(Reg),1,ptr);
+	fclose(ptr);
+}
+
+void MostrarAmigos()
+{
+	int Cont=0;
+	system("cls");
+	FILE *ptr;
+	Registro Reg;
+	ptr = fopen("amigos.dat","rb");
+	if(ptr !=NULL)
+	{
+		cout<<" = = = = = = = = = = = = = = = = = = = = ="<<endl;
+		cout<<"- - - - - Listado de Amigos - - - - - - - "<<endl;
+		cout<<"- - - - - - - - - - - - - - - - - - - - - "<<endl;
+		cout<<"# - - Nombre - - - - Edad - - - - Sexo - -"<<endl;
+		cout<<"- - - - - - - - - - - - - - - - - - - - - "<<endl;
+
+		fread(&Reg,sizeof(Reg),1,ptr);
+		while((feof(ptr))==false)
+		{
+			Cont++;
+			if(Reg.Estado == 'A')
+			{
+				cout<<Cont<<"\t"<<Reg.Nombre<<"\t"<<Reg.Edad<<"\t"<<Reg.Sexo<<endl;
+			}
+			fread(&Reg,sizeof(Reg),1,ptr);
+		}
+		cout<<"- - - - - - - - - - - - - - - - - - - - - "<<endl;
+		fclose(ptr);
+	}else{
+		cout<"/nArchivo no existe...!!!/n";
+	}
+}
+
+void PromedioAmigos()
+{
+	system("cls");
+	int i, PromT=0, PromF=0, PromM=0, ContT=0, ContF=0, ContM=0;
+	FILE *ptr;
+	Registro Reg;
+	ptr = fopen("amigos.dat","rb");
+	if(ptr !=NULL)
+	{
+		fread(&Reg, sizeof(Reg), 1, ptr);
+		while(feof(ptr)==false)
+		{
+			if(Reg.Estado=='A')
+			{
+				if(Reg.Sexo=='M')
+				{
+					PromM=PromM+Reg.Edad;
+					ContM++;
+				}else{
+					PromF=PromF+Reg.Edad;
+					ContF++;
+				}
+				PromT=PromT+Reg.Edad;
+				ContT++;
+			}
+			fread(&Reg,sizeof(Reg),1,ptr);
+		}
+		fclose(ptr);
+	}else{
+		cout<<"Estado No existe"<<endl;
+	}
+	PromM=PromM/ContM;
+	PromF=PromF/ContF;
+	PromT=PromT/ContT;
+	cout<<"Promedio Total: "<<PromT<<endl<<"Promedio Femenino: "<<PromF<<endl<<"Promedio Masculino: "<<PromM<<endl;
+}
+
+void BuscarAmigo()
+{
+	FILE *ptr;
+	regAmigo Reg;
+	ptr = fopen("amigos.dat","rb");
+
+}
+
+void main()
+{
+	int Opcion;
+	cout<<"- - - - - - - Menu - - - - - - -"<<endl;
+	cout<<"1. Adicionar Amigos"<<endl;
+	cout<<"2. Mostrar Amigos"<<endl;
+	cout<<"3. Mostrar Promedios"<<endl;
+	cout<<"4. Buscar por # de Registro"<<endl;
+	cout<<"0. Salir"<<endl;
+	cout<<endl;
+	cout<<"Selecione una opcion";
+	do{
+		cin>>Opcion;
+		switch(Opcion)
+		{
+			case 1:
+			{
+				AdicionarAmigo();
+			}break;
+			case 2:
+			{
+				MostrarAmigos();
+			}break;
+			case 3:
+			{
+				PromedioAmigos();
+			}
+			case 4:
+			{
+				BuscarAmigo();
+			}
+			case 0:
+			{
+				cout<<"Hasta Luego"<<endl;
+				Opcion=999;
+			}break;
+			default:
+			{
+				cout<<"Opcion Invalida"<<endl;
+			}break;
+		}
+	}while( Opcion=!999 );
+	getch();
+}
